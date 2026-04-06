@@ -1,103 +1,265 @@
-# Pokemon Detail Website
+# 🎮 Pokemon Detail Website
 
-Website Pokedex build bằng React + Vite, hiển thị danh sách Pokemon (Gen 1) và trang chi tiết từng Pokemon với chỉ số, mô tả loài, và thông tin Ability lấy trực tiếp từ PokeAPI.
+Website Pokedex được xây dựng bằng **React + Vite**, hiển thị danh sách 151 Pokemon (Thế hệ 1 - Kanto) và trang chi tiết chi tiết cho từng Pokemon bao gồm chỉ số, mô tả loài, khả năng và thông tin chi tiết từ **PokeAPI**.
 
-## 1) Mục tiêu dự án
+> **Trạng thái**: ✅ Active và sẵn sàng sử dụng
 
-- Cung cấp trải nghiệm tra cứu Pokemon nhanh, dễ dùng, giao diện hiện đại.
-- Tách rõ 2 luồng chính:
-  - Trang danh sách (`/`): tìm kiếm + phân trang kiểu "Load more".
-  - Trang chi tiết (`/pokemon/:id`): ảnh chính, type, stats, about, abilities.
-- Dùng API public (PokeAPI), không cần backend riêng.
+## 📋 Mục tiêu dự án
 
-## 2) Tính năng đang có
+- ✨ Cung cấp trải nghiệm tra cứu Pokemon nhanh chóng, dễ sử dụng với giao diện hiện đại
+- 🎯 Tách rõ 2 luồng chính:
+  - **Trang danh sách** (`/`): Tìm kiếm theo thời gian thực + phân trang kiểu "Load More"
+  - **Trang chi tiết** (`/pokemon/:id`): Hiển thị toàn bộ thông tin Pokemon
+- 🔄 Lấy dữ liệu từ API public (PokeAPI), không cần backend riêng
 
-- Danh sách 151 Pokemon đầu tiên (Kanto) từ endpoint `pokemon?limit=151`.
-- Tìm kiếm theo tên Pokemon theo thời gian thực.
-- Nút `Load More` để tăng số lượng card hiển thị.
-- Click card để vào trang chi tiết theo id.
-- Trang chi tiết hiển thị:
-  - ID, tên, genus, mô tả flavor text (tiếng Anh).
-  - Ảnh official artwork.
-  - Type badges.
-  - Bảng chỉ số base/min/max ở level 100.
-  - Tổng chỉ số và thanh phân bố stats.
-  - Kích thước/cân nặng (m, ft, kg, lbs).
-  - Ability thường và hidden ability, effect + flavor text.
-- Trạng thái loading và xử lý fallback cơ bản khi không có dữ liệu.
+## ✨ Tính năng chính
 
-## 3) Công nghệ sử dụng
+### Trang Danh Sách
+- 📱 Hiển thị 151 Pokemon đầu tiên (Kanto Generation)
+- 🔍 **Tìm kiếm theo thời gian thực** - Lọc Pokemon theo tên khi gõ
+- 📊 **Progressive Loading** - Nút "Load More" để tăng số lượng card hiển thị (20 Pokemon mỗi lần)
+- 🎨 **Thẻ Pokemon đẹp mắt** - Hiển thị tên, ID, ảnh và type
+- 📍 **Điều hướng dễ dàng** - Click card để xem chi tiết
 
-- `React` + `react-dom`
-- `Vite` (build tool/dev server)
-- `react-router` (routing)
-- `Tailwind CSS v4` + `tw-animate-css`
-- Bộ UI components theo hướng Radix/shadcn (nằm trong `src/app/components/ui`)
-- Icon: `lucide-react`
-- Data source: [PokeAPI](https://pokeapi.co/)
+### Trang Chi Tiết Pokemon
+- 🆔 **Thông tin cơ bản**: ID, tên, genus (loại Pokemon), mô tả flavor text (tiếng Anh)
+- 🖼️ **Ảnh official artwork** từ PokeAPI
+- 🏷️ **Type badges** với màu sắc phân biệt
+- 📈 **Bảng chỉ số chi tiết**:
+  - Base stats
+  - Min stats (0 IV, 0 EV)
+  - Max stats (31 IV, 252 EV) tại **Level 100**
+  - Tính toán tự động dựa trên công thức Pokemon
+- 📊 **Biểu đồ phân bố Stats** (progress bar cho từng stat)
+- 📏 **Kích thước & Cân nặng** (hiển thị cả đơn vị metric và imperial: m/ft, kg/lbs)
+- ⚡ **Tab Abilities**:
+  - Khả năng thường (Normal Abilities)
+  - Khả năng ẩn (Hidden Ability)
+  - Chi tiết effect và flavor text cho mỗi ability
 
-## 4) Cấu trúc thư mục chính
+### UX Features
+- ⏳ **Loading states** - Spinner animation khi tải dữ liệu
+- ⚠️ **Error handling** - Xử lý và hiển thị lỗi khi Pokemon không tìm thấy
+- 🎨 **Gradient backgrounds** - Giao diện hiện đại với gradient từ xanh dương đến tím
+- 📱 **Responsive design** - Tối ưu cho mobile, tablet, desktop
 
-```text
-.
-├─ src/
-│  ├─ main.jsx                    # entry point
-│  ├─ app/
-│  │  ├─ App.jsx                  # gắn RouterProvider
-│  │  ├─ routes.jsx               # định nghĩa route
-│  │  └─ components/
-│  │     ├─ Home.jsx              # trang danh sách
-│  │     ├─ PokemonCard.jsx       # card item
-│  │     ├─ PokemonDetail.jsx     # trang chi tiết
-│  │     ├─ figma/                # utils component từ Make/Figma
-│  │     └─ ui/                   # bộ component UI dùng lại
-│  └─ styles/
-│     ├─ index.css
-│     ├─ tailwind.css
-│     └─ theme.css
-├─ index.html
-├─ vite.config.ts
-└─ package.json
+## 🛠️ Công nghệ & Dependencies
+
+### Core
+- **React 18+** - UI library
+- **Vite 5+** - Build tool & dev server (cực nhanh)
+- **React Router v6** - Client-side routing
+- **TailwindCSS v4** - Utility-first CSS
+- **Radix UI** - Accessible UI component library (primitives)
+- **Lucide React** - SVG icon library
+
+### Styling & Animation
+- **TW Animate CSS** - Animation utilities
+- **Emotion** - CSS-in-JS (MUI dependency)
+
+### API & Data
+- **PokeAPI** - Public Pokemon API (free, no auth needed)
+
+### Additional
+- **shadcn/ui patterns** - Pre-built component patterns
+- **Canvas Confetti** - Optional confetti effects
+- **date-fns** - Date utilities
+- **Embla Carousel** - Carousel component
+
+## 📁 Cấu trúc Thư mục
+
+```
+Pokemon Detail Website/
+├── src/
+│   ├── main.jsx                    # Entry point React
+│   ├── app/
+│   │   ├── App.jsx                 # Root component - RouterProvider
+│   │   ├── routes.jsx              # Định nghĩa routes (/, /pokemon/:id)
+│   │   └── components/
+│   │       ├── Home.jsx            # Trang danh sách + search + load more
+│   │       ├── PokemonCard.jsx     # Card component cho mỗi Pokemon
+│   │       ├── PokemonDetail.jsx   # Trang chi tiết Pokemon
+│   │       ├── MainLayout.jsx      # Layout wrapper (nếu có)
+│   │       ├── figma/
+│   │       │   └── ImageWithFallback.jsx  # Image component với fallback
+│   │       └── ui/                 # Radix UI + shadcn/ui components
+│   │           ├── button.jsx
+│   │           ├── card.jsx
+│   │           ├── badge.jsx
+│   │           ├── tabs.jsx
+│   │           ├── input.jsx
+│   │           ├── progress.jsx
+│   │           └── ... (30+ UI components)
+│   └── styles/
+│       ├── index.css               # Global styles
+│       ├── tailwind.css            # Tailwind directives
+│       ├── theme.css               # Theme variables
+│       └── fonts.css               # Font definitions
+├── index.html                      # HTML entry point
+├── vite.config.ts                  # Vite configuration
+├── postcss.config.mjs              # PostCSS config (Tailwind)
+├── package.json                    # Dependencies & scripts
+├── README.md                       # This file
+├── ATTRIBUTIONS.md                 # Credits & attributions
+└── guidelines/
+    └── Guidelines.md               # Coding guidelines
 ```
 
-## 5) Luồng hoạt động dữ liệu
+## 🔄 Luồng Dữ Liệu & API Calls
 
 ### Trang Home (`/`)
 
-1. `useEffect` gọi `fetchPokemon()`.
-2. Request:
-   - `https://pokeapi.co/api/v2/pokemon?limit=151`
-3. Lưu vào state `pokemon`.
-4. Người dùng nhập từ khóa -> filter theo `name`.
-5. `displayCount` quyết định số card render.
-6. Mỗi card tách `id` từ `pokemon.url`, dùng để điều hướng.
+```
+1. Component mount → useEffect kích hoạt
+2. Fetch: GET https://pokeapi.co/api/v2/pokemon?limit=151
+3. Dữ liệu trả về → Lưu vào state `pokemon`
+4. User tìm kiếm → Filter theo `name.toLowerCase().includes(searchTerm)`
+5. displayCount state quyết định số card render (20, 40, 60...)
+6. Mỗi card extract ID từ pokemon.url: `/pokemon/{id}/` → link tới detail page
+```
+
+**Data Flow:**
+```
+PokeAPI (Pokemon List) → Home.jsx 
+  → State: [pokemon, displayCount, searchTerm]
+  → Filtered & Sliced Array
+  → PokemonCard Components with routing
+```
 
 ### Trang Pokemon Detail (`/pokemon/:id`)
 
-1. Lấy `id` từ URL params.
-2. Gọi song song:
-   - `https://pokeapi.co/api/v2/pokemon/:id`
-   - `https://pokeapi.co/api/v2/pokemon-species/:id`
-3. Sau đó loop từng ability trong `pokemonData.abilities` để fetch chi tiết ability.
-4. Kết quả ability lưu trong `Map`, key = tên ability.
-5. Render 3 tab chính:
-   - `Stats`
-   - `About`
-   - `Abilities`
+```
+1. URL params → Extract id
+2. Fetch song song:
+   - GET https://pokeapi.co/api/v2/pokemon/{id}           → pokemonData
+   - GET https://pokeapi.co/api/v2/pokemon-species/{id}   → speciesData
+3. Từ pokemonData.abilities → Loop & fetch chi tiết từng ability:
+   - GET https://pokeapi.co/api/v2/ability/{abilityName}
+   - Lưu vào Map: { abilityName → abilityDetail }
+4. Render 3 tabs: Stats | About | Abilities
+5. Tính toán stats tại Level 100 bằng Pokemon formula
+```
 
-## 6) Router
+**Data Flow:**
+```
+URL (/pokemon/1)
+  → Extract ID (1)
+  → Fetch Pokemon + Species in parallel
+  → Extract abilities array
+  → Fetch each ability detail
+  → Render tabs with complete data
+```
+
+### Stat Calculation at Level 100
+
+```javascript
+// Formula: ((2 × base + IV + EV÷4) × level ÷ 100) + level + 5
+// HP formula khác: ((2 × base + IV + EV÷4) × level ÷ 100) + level + 5 + 5
+
+// Min: IV=0, EV=0 (worst case)
+// Max: IV=31, EV=252 (best case competitive)
+```
+
+## 🚀 Cách Chạy Dự Án Local
+
+### Yêu Cầu Hệ Thống
+
+- **Node.js** >= 18 (khuyến nghị LTS mới nhất)
+- **npm** >= 9 hoặc **yarn** >= 1.22
+- **Git** (để clone repo)
+
+### Cài Đặt & Chạy
+
+```bash
+# 1. Clone repository
+git clone <repository-url>
+cd "Pokemon Detail Website"
+
+# 2. Cài đặt dependencies
+npm install
+# hoặc: yarn install
+
+# 3. Chạy dev server (hot reload enabled)
+npm run dev
+# Truy cập: http://localhost:5173
+
+# 4. Build production
+npm run build
+
+# 5. Preview production build local
+npm run preview
+```
+
+### Available Scripts
+
+| Command | Mục đích |
+|---------|---------|
+| `npm run dev` | Chạy dev server (Vite) với hot reload |
+| `npm run build` | Build production (output: `dist/`) |
+| `npm run preview` | Preview build production local |
+
+## 🎨 Routing Map
 
 Định nghĩa trong `src/app/routes.jsx`:
 
-- `/` -> `Home`
-- `/pokemon/:id` -> `PokemonDetail`
+| Route | Component | Mục đích |
+|-------|-----------|---------|
+| `/` | `Home.jsx` | Danh sách Pokemon + tìm kiếm + load more |
+| `/pokemon/:id` | `PokemonDetail.jsx` | Trang chi tiết Pokemon (Stats, About, Abilities) |
 
-## 7) Chạy dự án local
+## 🎨 Type Color Map
 
-### Yêu cầu
+Mỗi type Pokemon có màu sắc riêng (applied bằng Tailwind classes):
 
-- Node.js >= 18 (khuyến nghị LTS mới)
-- npm >= 9
+```javascript
+{
+  normal: "bg-gray-400",
+  fire: "bg-orange-500",
+  water: "bg-blue-500",
+  electric: "bg-yellow-400",
+  grass: "bg-green-500",
+  ice: "bg-blue-300",
+  fighting: "bg-red-600",
+  poison: "bg-purple-500",
+  // ... và nhiều type khác
+}
+```
+
+## 📝 Environment Variables
+
+Hiện tại project không cần `.env` file vì sử dụng public API.
+
+**Nếu muốn sử dụng cached data**, tạo `.env.local`:
+```
+VITE_API_BASE=https://pokeapi.co/api/v2
+```
+
+## 🐛 Troubleshooting
+
+### Dev server không khởi động
+```bash
+# Xóa node_modules & lock file
+rm -r node_modules package-lock.json
+npm install
+npm run dev
+```
+
+### CORS errors khi fetch
+- PokeAPI support CORS, nên không có vấn đề
+- Kiểm tra Console tab trong DevTools
+
+### Pokemon image không load
+- Official artwork có thể không có cho Pokemon cụ thể
+- Fallback sang sprite mặc định
+
+## 📚 Resources
+
+- [PokeAPI Documentation](https://pokeapi.co/)
+- [React Documentation](https://react.dev)
+- [Vite Documentation](https://vitejs.dev)
+- [TailwindCSS Documentation](https://tailwindcss.com)
+- [Radix UI Documentation](https://www.radix-ui.com)
+- [React Router Documentation](https://reactrouter.com)
 
 ### Cài đặt và chạy
 

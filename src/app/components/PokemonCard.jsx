@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { Card, CardContent } from "./ui/card";
 const typeColors = {
     normal: "bg-gray-400",

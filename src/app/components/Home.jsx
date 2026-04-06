@@ -3,7 +3,7 @@ import { PokemonCard } from "./PokemonCard";
 import { Loader2 } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-export function Home() {
+export default function Home() {
     const [pokemon, setPokemon] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");

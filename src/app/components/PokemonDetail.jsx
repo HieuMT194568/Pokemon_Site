@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router";
+import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
@@ -35,7 +35,7 @@ function calculateStat(base, iv, ev, isHP) {
         return Math.floor(((2 * base + iv + Math.floor(ev / 4)) * 100) / 100) + 5;
     }
 }
-export function PokemonDetail() {
+export default function PokemonDetail() {
     const { id } = useParams();
     const [pokemon, setPokemon] = useState(null);
     const [species, setSpecies] = useState(null);
