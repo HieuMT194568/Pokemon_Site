@@ -1,24 +1,34 @@
 # 🎮 Pokemon Detail Website
 
-Website Pokedex được xây dựng bằng **React + Vite**, hiển thị danh sách 151 Pokemon (Thế hệ 1 - Kanto) và trang chi tiết chi tiết cho từng Pokemon bao gồm chỉ số, mô tả loài, khả năng và thông tin chi tiết từ **PokeAPI**.
+Website Pokedex hiện đại được xây dựng bằng **Next.js + Ant Design**, hiển thị danh sách toàn bộ Pokemon và trang chi tiết với thông tin từ **PokeAPI**. Dự án đã được nâng cấp với kiến trúc SSR và Client-side caching.
 
 > **Trạng thái**: ✅ Active và sẵn sàng sử dụng
 
+## 🚀 Những Tính Năng Mới Nổi Bật (Mới Cập Nhật)
+
+- ⚡ **Chuyển đổi sang Next.js**: Chuyển từ React SPA (Vite) sang Next.js App Router, cải thiện hiệu suất render và quản lý route.
+- 🎨 **Giao diện Ant Design**: Thay thế giao diện cũ bằng bộ UI Components mạnh mẽ và nhất quán từ Ant Design.
+- 🔄 **Tối ưu hóa Fetching Data (TanStack Query)**: Tích hợp `@tanstack/react-query` để tự động caching, giảm thiểu request trùng lặp và tăng tốc độ tải trang.
+- 📜 **Virtualized Infinite Scrolling (TanStack Virtual)**: Cài đặt kỹ thuật render ảo hóa với `@tanstack/react-virtual`, cho phép cuộn mượt mà qua danh sách toàn bộ Pokémon mà không giảm hiệu năng trình duyệt.
+- 🗂️ **Hỗ trợ Đa Thế Hệ (Generations) & Items**: Bổ sung phân trang theo thế hệ qua route `/gen/[genId]` và danh sách vật phẩm qua route `/items`.
+
 ## 📋 Mục tiêu dự án
 
-- ✨ Cung cấp trải nghiệm tra cứu Pokemon nhanh chóng, dễ sử dụng với giao diện hiện đại
-- 🎯 Tách rõ 2 luồng chính:
-  - **Trang danh sách** (`/`): Tìm kiếm theo thời gian thực + phân trang kiểu "Load More"
+- ✨ Cung cấp trải nghiệm tra cứu Pokemon cực nhanh với hiệu năng ở mức production-grade
+- 🎯 Giao diện mượt mà xử lý được số lượng dữ liệu cực lớn không lag
+- 🔄 Tận dụng sức mạnh của Next.js Server Components và TanStack Query
+- 🎯 Tách rõ các luồng chính:
+  - **Trang danh sách** (`/`): Tìm kiếm theo thời gian thực + Virtualized Infinite Scrolling
   - **Trang chi tiết** (`/pokemon/:id`): Hiển thị toàn bộ thông tin Pokemon
 - 🔄 Lấy dữ liệu từ API public (PokeAPI), không cần backend riêng
 
 ## ✨ Tính năng chính
 
 ### Trang Danh Sách
-- 📱 Hiển thị 151 Pokemon đầu tiên (Kanto Generation)
-- 🔍 **Tìm kiếm theo thời gian thực** - Lọc Pokemon theo tên khi gõ
-- 📊 **Progressive Loading** - Nút "Load More" để tăng số lượng card hiển thị (20 Pokemon mỗi lần)
-- 🎨 **Thẻ Pokemon đẹp mắt** - Hiển thị tên, ID, ảnh và type
+- 📱 Hiển thị danh sách khổng lồ tất cả các Pokemon mượt mà
+- 🔍 **Tìm kiếm theo thời gian thực** - Lọc Pokemon theo tên
+- 📊 **Virtualized Infinite Scrolling** - Tự động tải và render Pokemon khi cuộn nhờ TanStack Virtual
+- 🎨 **Thẻ Pokemon đẹp mắt** - Hiển thị tên, ID, ảnh và type với Ant Design Cards
 - 📍 **Điều hướng dễ dàng** - Click card để xem chi tiết
 
 ### Trang Chi Tiết Pokemon
@@ -38,134 +48,82 @@ Website Pokedex được xây dựng bằng **React + Vite**, hiển thị danh 
   - Chi tiết effect và flavor text cho mỗi ability
 
 ### UX Features
-- ⏳ **Loading states** - Spinner animation khi tải dữ liệu
-- ⚠️ **Error handling** - Xử lý và hiển thị lỗi khi Pokemon không tìm thấy
-- 🎨 **Gradient backgrounds** - Giao diện hiện đại với gradient từ xanh dương đến tím
+- ⏳ **Loading states** - Spinner animation / Skeletons khi tải dữ liệu
+- ⚠️ **Error handling** - Xử lý và hiển thị lỗi thân thiện với người dùng
 - 📱 **Responsive design** - Tối ưu cho mobile, tablet, desktop
 
 ## 🛠️ Công nghệ & Dependencies
 
 ### Core
-- **React 18+** - UI library
-- **Vite 5+** - Build tool & dev server (cực nhanh)
-- **React Router v6** - Client-side routing
-- **TailwindCSS v4** - Utility-first CSS
-- **Radix UI** - Accessible UI component library (primitives)
-- **Lucide React** - SVG icon library
+- **Next.js 16+** - React Framework (App Router)
+- **React 19** - UI library
+- **Ant Design (antd)** - UI Component Library mạnh mẽ
 
-### Styling & Animation
-- **TW Animate CSS** - Animation utilities
-- **Emotion** - CSS-in-JS (MUI dependency)
+### Hiệu Năng & Data Management
+- **TanStack Query** (`@tanstack/react-query`) - Data fetching, caching, API state management
+- **TanStack Virtual** (`@tanstack/react-virtual`) - Kỹ thuật ảo hóa danh sách lớn (Virtualization)
 
 ### API & Data
 - **PokeAPI** - Public Pokemon API (free, no auth needed)
 
-### Additional
-- **shadcn/ui patterns** - Pre-built component patterns
-- **Canvas Confetti** - Optional confetti effects
-- **date-fns** - Date utilities
-- **Embla Carousel** - Carousel component
-
 ## 📁 Cấu trúc Thư mục
 
-```
+```text
 Pokemon Detail Website/
 ├── src/
-│   ├── main.jsx                    # Entry point React
 │   ├── app/
-│   │   ├── App.jsx                 # Root component - RouterProvider
-│   │   ├── routes.jsx              # Định nghĩa routes (/, /pokemon/:id)
-│   │   └── components/
-│   │       ├── Home.jsx            # Trang danh sách + search + load more
-│   │       ├── PokemonCard.jsx     # Card component cho mỗi Pokemon
-│   │       ├── PokemonDetail.jsx   # Trang chi tiết Pokemon
-│   │       ├── MainLayout.jsx      # Layout wrapper (nếu có)
-│   │       ├── figma/
-│   │       │   └── ImageWithFallback.jsx  # Image component với fallback
-│   │       └── ui/                 # Radix UI + shadcn/ui components
-│   │           ├── button.jsx
-│   │           ├── card.jsx
-│   │           ├── badge.jsx
-│   │           ├── tabs.jsx
-│   │           ├── input.jsx
-│   │           ├── progress.jsx
-│   │           └── ... (30+ UI components)
-│   └── styles/
-│       ├── index.css               # Global styles
-│       ├── tailwind.css            # Tailwind directives
-│       ├── theme.css               # Theme variables
-│       └── fonts.css               # Font definitions
-├── index.html                      # HTML entry point
-├── vite.config.ts                  # Vite configuration
-├── postcss.config.mjs              # PostCSS config (Tailwind)
+│   │   ├── layout.jsx              # Root layout Next.js
+│   │   ├── page.jsx                # Trang chủ (Danh sách Pokemon)
+│   │   ├── error.jsx               # Error boundary
+│   │   ├── gen/
+│   │   │   └── [genId]/page.jsx    # Danh sách Pokemon theo thế hệ
+│   │   ├── items/
+│   │   │   └── page.jsx            # Danh sách Items
+│   │   ├── constants/
+│   │   │   └── pokemon.js          # Helper và cấu hình
+│   │   └── ...
+│   └── ...
 ├── package.json                    # Dependencies & scripts
+├── next.config.mjs                 # Next.js configuration
 ├── README.md                       # This file
-├── ATTRIBUTIONS.md                 # Credits & attributions
-└── guidelines/
-    └── Guidelines.md               # Coding guidelines
+└── ...
 ```
 
-## 🔄 Luồng Dữ Liệu & API Calls
+## 🔄 Luồng Dữ Luệ & API Calls
 
 ### Trang Home (`/`)
 
-```
-1. Component mount → useEffect kích hoạt
-2. Fetch: GET https://pokeapi.co/api/v2/pokemon?limit=151
-3. Dữ liệu trả về → Lưu vào state `pokemon`
-4. User tìm kiếm → Filter theo `name.toLowerCase().includes(searchTerm)`
-5. displayCount state quyết định số card render (20, 40, 60...)
-6. Mỗi card extract ID từ pokemon.url: `/pokemon/{id}/` → link tới detail page
-```
+Sử dụng TanStack Query để lấy danh sách Pokemon và TanStack Virtual để hiển thị.
 
 **Data Flow:**
-```
-PokeAPI (Pokemon List) → Home.jsx 
-  → State: [pokemon, displayCount, searchTerm]
-  → Filtered & Sliced Array
-  → PokemonCard Components with routing
+```text
+PokeAPI (Pokemon List)
+  → React Query Cache
+  → Render mượt mà qua TanStack Virtual
+  → PokemonCard Components với Next.js Routing
 ```
 
 ### Trang Pokemon Detail (`/pokemon/:id`)
 
-```
-1. URL params → Extract id
-2. Fetch song song:
-   - GET https://pokeapi.co/api/v2/pokemon/{id}           → pokemonData
-   - GET https://pokeapi.co/api/v2/pokemon-species/{id}   → speciesData
-3. Từ pokemonData.abilities → Loop & fetch chi tiết từng ability:
-   - GET https://pokeapi.co/api/v2/ability/{abilityName}
-   - Lưu vào Map: { abilityName → abilityDetail }
-4. Render 3 tabs: Stats | About | Abilities
-5. Tính toán stats tại Level 100 bằng Pokemon formula
-```
-
-**Data Flow:**
-```
-URL (/pokemon/1)
-  → Extract ID (1)
-  → Fetch Pokemon + Species in parallel
-  → Extract abilities array
-  → Fetch each ability detail
-  → Render tabs with complete data
+```text
+1. Next.js Routing → Extract id
+2. Tận dụng React Query để lấy thông tin Pokemon + Species song song
+3. Tính toán và hiển thị thông số chi tiết
 ```
 
 ### Stat Calculation at Level 100
 
 ```javascript
 // Formula: ((2 × base + IV + EV÷4) × level ÷ 100) + level + 5
-// HP formula khác: ((2 × base + IV + EV÷4) × level ÷ 100) + level + 5 + 5
-
-// Min: IV=0, EV=0 (worst case)
-// Max: IV=31, EV=252 (best case competitive)
+// HP formula khác: ((2 × base + IV + EV÷4) × level ÷ 100) + level + 10
 ```
 
 ## 🚀 Cách Chạy Dự Án Local
 
 ### Yêu Cầu Hệ Thống
 
-- **Node.js** >= 18 (khuyến nghị LTS mới nhất)
-- **npm** >= 9 hoặc **yarn** >= 1.22
+- **Node.js** >= 18
+- **npm** >= 9 hoặc **pnpm** (khuyến nghị)
 - **Git** (để clone repo)
 
 ### Cài Đặt & Chạy
@@ -176,177 +134,75 @@ git clone <repository-url>
 cd "Pokemon Detail Website"
 
 # 2. Cài đặt dependencies
-npm install
-# hoặc: yarn install
+pnpm install
 
-# 3. Chạy dev server (hot reload enabled)
-npm run dev
-# Truy cập: http://localhost:5173
+# 3. Chạy dev server
+pnpm run dev
+# Truy cập: http://localhost:3000
 
 # 4. Build production
-npm run build
+pnpm run build
 
-# 5. Preview production build local
-npm run preview
+# 5. Start production build
+pnpm run start
 ```
 
 ### Available Scripts
 
 | Command | Mục đích |
 |---------|---------|
-| `npm run dev` | Chạy dev server (Vite) với hot reload |
-| `npm run build` | Build production (output: `dist/`) |
-| `npm run preview` | Preview build production local |
+| `pnpm run dev` | Chạy Next.js dev server |
+| `pnpm run build` | Build production |
+| `pnpm run start` | Chạy server production |
 
 ## 🎨 Routing Map
 
-Định nghĩa trong `src/app/routes.jsx`:
-
-| Route | Component | Mục đích |
-|-------|-----------|---------|
-| `/` | `Home.jsx` | Danh sách Pokemon + tìm kiếm + load more |
-| `/pokemon/:id` | `PokemonDetail.jsx` | Trang chi tiết Pokemon (Stats, About, Abilities) |
-
-## 🎨 Type Color Map
-
-Mỗi type Pokemon có màu sắc riêng (applied bằng Tailwind classes):
-
-```javascript
-{
-  normal: "bg-gray-400",
-  fire: "bg-orange-500",
-  water: "bg-blue-500",
-  electric: "bg-yellow-400",
-  grass: "bg-green-500",
-  ice: "bg-blue-300",
-  fighting: "bg-red-600",
-  poison: "bg-purple-500",
-  // ... và nhiều type khác
-}
-```
+| Route | Mục đích |
+|-------|---------|
+| `/` | Danh sách Pokemon + tìm kiếm + virtualized scroll |
+| `/pokemon/:id` | Trang chi tiết Pokemon |
+| `/gen/[genId]` | Danh sách Pokemon theo Generation |
+| `/items` | Trang danh sách vật phẩm |
 
 ## 📝 Environment Variables
 
 Hiện tại project không cần `.env` file vì sử dụng public API.
 
-**Nếu muốn sử dụng cached data**, tạo `.env.local`:
-```
-VITE_API_BASE=https://pokeapi.co/api/v2
-```
-
 ## 🐛 Troubleshooting
 
-### Dev server không khởi động
+### Lỗi Cache Next.js
+Nếu có lỗi parse hoặc build, hãy thử xóa thư mục cache và cài lại:
 ```bash
-# Xóa node_modules & lock file
-rm -r node_modules package-lock.json
-npm install
-npm run dev
+rm -rf .next node_modules
+pnpm install
+pnpm run dev
 ```
-
-### CORS errors khi fetch
-- PokeAPI support CORS, nên không có vấn đề
-- Kiểm tra Console tab trong DevTools
-
-### Pokemon image không load
-- Official artwork có thể không có cho Pokemon cụ thể
-- Fallback sang sprite mặc định
 
 ## 📚 Resources
 
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Ant Design](https://ant.design/docs/react/introduce)
+- [TanStack Query](https://tanstack.com/query/latest)
+- [TanStack Virtual](https://tanstack.com/virtual/latest)
 - [PokeAPI Documentation](https://pokeapi.co/)
-- [React Documentation](https://react.dev)
-- [Vite Documentation](https://vitejs.dev)
-- [TailwindCSS Documentation](https://tailwindcss.com)
-- [Radix UI Documentation](https://www.radix-ui.com)
-- [React Router Documentation](https://reactrouter.com)
-
-### Cài đặt và chạy
-
-```bash
-npm install
-npm run dev
-```
-
-Mặc định Vite sẽ chạy local dev server tại cổng 5173 (hoặc cổng trống kế tiếp).
-
-### Build production
-
-```bash
-npm run build
-```
-
-Output build ở thư mục `dist/`.
-
-## 8) Các script hiện có
-
-Trong `package.json`:
-
-- `npm run dev`: chạy môi trường phát triển.
-- `npm run build`: tạo bản build production.
-
-## 9) UI/Theming
-
-- Style tổng được import từ `src/styles/index.css`.
-- `tailwind.css` cấu hình nguồn class utility cho Tailwind v4.
-- `theme.css` chứa CSS variables (màu, radius, dark variant...).
-- Bộ `src/app/components/ui/*` là các component tái sử dụng cho Button, Input, Card, Tabs, Badge, Progress...
-
-## 10) Các điểm cần lưu ý thực tế
-
-- Dự án hiện dùng JSX cho phần lớn component, nhưng vẫn còn 2 file `.ts`:
-  - `src/app/components/ui/utils.ts`
-  - `src/app/components/ui/use-mobile.ts`
-- Vite vẫn build bình thường với cấu hình hiện tại.
-- `package.json` có rất nhiều dependency UI, nhưng app hiện chỉ dùng một phần nhỏ.
-- Dữ liệu phụ thuộc hoàn toàn vào PokeAPI, nên:
-  - Mạng chậm có thể làm trang chi tiết load lâu hơn (do fetch ability từng cái).
-  - Nếu API lỗi/throttle thì sẽ ảnh hưởng dữ liệu hiển thị.
 
 ## 11) Hạn chế hiện tại
 
-- Chưa có caching cho API responses.
-- Chưa có trạng thái error UI rõ ràng cho mọi request (mới chủ yếu `console.error`).
 - Chưa có test tự động (unit/integration/e2e).
 - Chưa có script lint/format chính thức trong `package.json`.
-- Trang detail fetch ability theo vòng lặp nối tiếp (có thể tối ưu song song có kiểm soát).
 
-## 12) Định hướng nâng cấp đề xuất
+## 12) Những Nâng Cấp Đã Hoàn Thành Gần Đây 🎉
 
-- Bổ sung cache (ví dụ memory cache hoặc React Query) để giảm số lần gọi API.
-- Chuẩn hóa xử lý lỗi UI (toast/error panel/retry button).
-- Thêm phân trang server-side hoặc infinite scroll cho danh sách lớn hơn 151.
-- Tối ưu performance ảnh (placeholder, prefetch route, skeleton chi tiết hơn).
-- Bổ sung test:
-  - Unit cho helper tính chỉ số.
-  - Integration cho Home và Detail.
-  - E2E cho flow tìm kiếm -> vào chi tiết -> quay lại.
-- Rà soát và loại dependency không dùng để giảm bundle size.
+- ✅ **Chuyển đổi Next.js**: Nâng cấp từ React SPA sang Next.js App Router.
+- ✅ **React Query**: Tự động caching API, giảm số lần gọi mạng.
+- ✅ **Virtualization**: Cài đặt `@tanstack/react-virtual` thay thế Load More.
+- ✅ **Ant Design**: Thay thế UI component với framework hoàn chỉnh.
 
 ## 13) Triển khai (deploy) gợi ý
 
 Có thể deploy dễ dàng lên:
-
-- Vercel
+- Vercel (Khuyến nghị cho Next.js)
 - Netlify
 - Cloudflare Pages
-- GitHub Pages (kèm cấu hình SPA fallback)
 
-Với Vercel/Netlify, chỉ cần:
-
-- Build command: `npm run build`
-- Output directory: `dist`
-
-## 14) Ghi chú cho người maintain
-
-- Nếu đổi tên route, nhớ cập nhật `Link` trong `PokemonCard.jsx` và nút Back trong `PokemonDetail.jsx`.
-- Nếu đổi cấu trúc response PokeAPI (hoặc API thay đổi), cần kiểm tra lại:
-  - `species.flavor_text_entries`
-  - `species.genera`
-  - `pokemon.abilities`
-  - `pokemon.sprites.other["official-artwork"]`
-- Khi thêm component mới, ưu tiên tái sử dụng từ `src/app/components/ui`.
-
----
-
-Nếu bạn muốn, mình có thể tạo luôn bản README thứ hai theo hướng "cho recruiter/client" (ngắn gọn, marketing hơn) và giữ bản này làm tài liệu kỹ thuật nội bộ.
+Với Vercel, ứng dụng Next.js của bạn sẽ tự động được nhận diện và cấu hình Build Command / Output Directory.
